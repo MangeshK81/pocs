@@ -8,19 +8,27 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TradeServiceImpl implements TradeStoreService{
+
+    private static final TradeStore  STORE = TradeStoreImpl.getInstance();
 
     @Override
     public void recieveTrade(Trade trade) throws InvalidTradeException {
         // Validate Trade
         validateTrade(trade);
 
+        STORE.put(trade.getTradeId(),trade);
 
+    }
 
-
+    @Override
+    public Optional<Trade> getTrade(String tradeId) {
+        Trade trade = (Trade) STORE.get(tradeId);
+        return Optional.of(trade);
     }
 
     private void validateTrade(Trade trade) throws InvalidTradeException {

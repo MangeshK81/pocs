@@ -1,7 +1,5 @@
 package com.tradestore.exceptions;
 
-import java.util.List;
-
 public class InvalidTradeException extends Exception {
     private String message;
     public InvalidTradeException(){
@@ -12,6 +10,4 @@ public class InvalidTradeException extends Exception {
         this.message = message;
     }
 
-    public InvalidTradeException(List<String> messages) {
-    }
 }
